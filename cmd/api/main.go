@@ -7,8 +7,8 @@ import (
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 
-	"project-sem/internal/handlers"
-	"project-sem/internal/myDB"
+	"project-sem/internal/controllers"
+	"project-sem/internal/DB"
 )
 
 func main() {
@@ -18,10 +18,10 @@ func main() {
 }
 
 func run() error {
-	if err := myDB.InitDB(); err != nil {
+	if err := DB.InitDB(); err != nil {
 		return err
 	}
-	defer myDB.CloseDB()
+	defer DB.CloseDB()
 
 	r := mux.NewRouter()
 	r.HandleFunc("/api/v0/prices", handlers.HandlerPostPrices()).Methods("POST")

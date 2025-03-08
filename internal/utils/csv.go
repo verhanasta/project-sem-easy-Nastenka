@@ -6,7 +6,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"log"
-	"project-sem/internal/DB"
+	"project-sem-easy-Nastenka/internal/DB"
 )
 
 // CreateCSVFromPrices создает CSV файл из массива цен

@@ -7,8 +7,8 @@ import (
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 
-	"project-sem/internal/controllers"
-	"project-sem/internal/DB"
+	"project-sem-easy-Nastenka/internal/controllers"
+	"project-sem-easy-Nastenka/internal/DB"
 )
 
 func main() {

@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"project-sem/internal/DB"
+	"project-sem-easy-Nastenka/internal/DB"
 	"strings"
 )
 

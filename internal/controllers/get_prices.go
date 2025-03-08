@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"project-sem/internal/utils"
-	"project-sem/internal/DB"
+	"project-sem-easy-Nastenka/internal/utils"
+	"project-sem-easy-Nastenka/internal/DB"
 )
 
 // HandlerGetPrices обрабатывает GET-запрос для получения данных из базы данных

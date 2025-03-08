@@ -103,10 +103,10 @@ func setupStorage(cfg StorageConfig) (*sql.DB, error) {
 func prepareStorage() error {
 	_, err := storage.Exec(`CREATE TABLE IF NOT EXISTS prices (
 		id SERIAL PRIMARY KEY,
-		product_name TEXT NOT NULL,
+		name TEXT NOT NULL,
 		category TEXT NOT NULL,
 		price NUMERIC(10,2) NOT NULL,
-		creation_date TIMESTAMP NOT NULL
+		create_date TIMESTAMP NOT NULL
 	)`)
 	return err
 }
@@ -239,7 +239,7 @@ func saveRecords(records []PriceRecord) (int, error) {
 	}
 
 	stmt, err := tx.Prepare(`INSERT INTO prices 
-	(product_name, category, price, creation_date) 
+	(name, category, price, create_date)
 	VALUES ($1, $2, $3, $4)`)
 	if err != nil {
 		tx.Rollback()
@@ -298,7 +298,7 @@ func handleDataExport(w http.ResponseWriter, r *http.Request) {
 
 func fetchAllRecords() ([]PriceRecord, error) {
 	rows, err := storage.Query(`
-	SELECT id, product_name, category, price, creation_date 
+	SELECT id, name, category, price, create_date
 	FROM prices`)
 	if err != nil {
 		return nil, err

@@ -1,4 +1,4 @@
-package utils
+package fileutils
 
 import (
 	"archive/zip"
@@ -6,11 +6,11 @@ import (
 	"encoding/csv"
 	"fmt"
 	"log"
-	"project-sem-easy-Nastenka/internal/DB"
+	"project-sem/internal/myDB"
 )
 
 // CreateCSVFromPrices создает CSV файл из массива цен
-func CreateCSVFromPrices(prices []db.Price) (*bytes.Buffer, error) {
+func CreateCSVFromPrices(prices []myDB.Price) (*bytes.Buffer, error) {
 	var csvBuffer bytes.Buffer
 	writer := csv.NewWriter(&csvBuffer)
 

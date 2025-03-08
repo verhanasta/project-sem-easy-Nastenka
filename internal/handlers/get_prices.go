@@ -1,18 +1,18 @@
-package controllers
+package handlers
 
 import (
 	"fmt"
 	"log"
 	"net/http"
-	"project-sem-easy-Nastenka/internal/utils"
-	"project-sem-easy-Nastenka/internal/DB"
+	"project-sem/internal/fileutils"
+	"project-sem/internal/myDB"
 )
 
 // HandlerGetPrices обрабатывает GET-запрос для получения данных из базы данных
 func HandlerGetPrices() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Получаем данные из БД
-		prices, err := db.GetAllPrices()
+		prices, err := myDB.GetAllPrices()
 		if err != nil {
 			log.Printf("DB query error: %v", err)
 			http.Error(w, "Database error", http.StatusInternalServerError)

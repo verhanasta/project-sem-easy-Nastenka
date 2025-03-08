@@ -1,6 +1,6 @@
 #!/bin/bash
 # Конфигурация
-APP_DIR="${GITHUB_WORKSPACE}/cmd/api"
+APP_DIR="${GITHUB_WORKSPACE}/cmd/app"
 OUTPUT_BINARY="app"
 LOG_DIR="${GITHUB_WORKSPACE}/logs"
 LOG_FILE="${LOG_DIR}/app.log"

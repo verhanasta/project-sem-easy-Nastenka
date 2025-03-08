@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"archive/zip"
@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"project-sem-easy-Nastenka/internal/DB"
+	"project-sem/internal/myDB"
 	"strings"
 )
 
@@ -72,9 +72,9 @@ func HandlerPostPrices() http.HandlerFunc {
 			return
 		}
 
-		var inputPrices []db.InputPrice
+		var inputPrices []myDB.InputPrice
 		for i := 1; i < len(records); i++ {
-			price, err := db.ParseInputPrice(records[i])
+			price, err := myDB.ParseInputPrice(records[i])
 			if err != nil {
 				http.Error(w, "Data parsing error: "+err.Error(), http.StatusBadRequest)
 				return
@@ -82,7 +82,7 @@ func HandlerPostPrices() http.HandlerFunc {
 			inputPrices = append(inputPrices, price)
 		}
 
-		totalItems, totalCategories, totalPrice, err := db.InsertPrices(inputPrices)
+		totalItems, totalCategories, totalPrice, err := myDB.InsertPrices(inputPrices)
 		if err != nil {
 			http.Error(w, "DB insert error: "+err.Error(), http.StatusInternalServerError)
 			return

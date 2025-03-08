@@ -1,4 +1,4 @@
-package myDB
+package DB
 
 import (
 	"database/sql"

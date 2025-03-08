@@ -6,11 +6,11 @@ import (
 	"encoding/csv"
 	"fmt"
 	"log"
-	"project-sem/internal/myDB"
+	"project-sem/internal/DB"
 )
 
 // CreateCSVFromPrices создает CSV файл из массива цен
-func CreateCSVFromPrices(prices []myDB.Price) (*bytes.Buffer, error) {
+func CreateCSVFromPrices(prices []DB.Price) (*bytes.Buffer, error) {
 	var csvBuffer bytes.Buffer
 	writer := csv.NewWriter(&csvBuffer)
 

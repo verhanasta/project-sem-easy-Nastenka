@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"project-sem/internal/myDB"
+	"project-sem/internal/DB"
 	"strings"
 )
 
@@ -74,7 +74,7 @@ func HandlerPostPrices() http.HandlerFunc {
 
 		var inputPrices []myDB.InputPrice
 		for i := 1; i < len(records); i++ {
-			price, err := myDB.ParseInputPrice(records[i])
+			price, err := DB.ParseInputPrice(records[i])
 			if err != nil {
 				http.Error(w, "Data parsing error: "+err.Error(), http.StatusBadRequest)
 				return
@@ -82,7 +82,7 @@ func HandlerPostPrices() http.HandlerFunc {
 			inputPrices = append(inputPrices, price)
 		}
 
-		totalItems, totalCategories, totalPrice, err := myDB.InsertPrices(inputPrices)
+		totalItems, totalCategories, totalPrice, err := DB.InsertPrices(inputPrices)
 		if err != nil {
 			http.Error(w, "DB insert error: "+err.Error(), http.StatusInternalServerError)
 			return

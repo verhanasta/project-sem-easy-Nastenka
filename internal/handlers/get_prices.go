@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"project-sem/internal/fileutils"
+	"project-sem/internal/utils"
 	"project-sem/internal/DB"
 )
 
@@ -19,14 +19,14 @@ func HandlerGetPrices() http.HandlerFunc {
 			return
 		}
 
-		csvBuffer, err := fileutils.CreateCSVFromPrices(prices)
+		csvBuffer, err := utils.CreateCSVFromPrices(prices)
 		if err != nil {
 			log.Printf("CSV creation error: %v", err)
 			http.Error(w, "CSV generation error", http.StatusInternalServerError)
 			return
 		}
 
-		zipBuffer, err := fileutils.CreateZipFromCSV(csvBuffer)
+		zipBuffer, err := utils.CreateZipFromCSV(csvBuffer)
 		if err != nil {
 			log.Printf("ZIP creation error: %v", err)
 			http.Error(w, "Archive error", http.StatusInternalServerError)

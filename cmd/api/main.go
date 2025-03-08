@@ -8,7 +8,7 @@ import (
 	_ "github.com/lib/pq"
 
 	"project-sem/internal/controllers"
-	"project-sem/internal/DB"
+	"project-sem/internal/db"
 )
 
 func main() {
@@ -18,10 +18,10 @@ func main() {
 }
 
 func run() error {
-	if err := DB.InitDB(); err != nil {
+	if err := db.InitDB(); err != nil {
 		return err
 	}
-	defer DB.CloseDB()
+	defer db.CloseDB()
 
 	r := mux.NewRouter()
 	r.HandleFunc("/api/v0/prices", handlers.HandlerPostPrices()).Methods("POST")

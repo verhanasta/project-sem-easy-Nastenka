@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"project-sem/internal/db"
+	"project-sem/internal/DB"
 	"strings"
 )
 

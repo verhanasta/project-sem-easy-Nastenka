@@ -8,7 +8,7 @@ import (
 	_ "github.com/lib/pq"
 
 	"project-sem/internal/controllers"
-	"project-sem/internal/db"
+	"project-sem/internal/DB"
 )
 
 func main() {

@@ -72,7 +72,7 @@ func HandlerPostPrices() http.HandlerFunc {
 			return
 		}
 
-		var inputPrices []myDB.InputPrice
+		var inputPrices []DB.InputPrice
 		for i := 1; i < len(records); i++ {
 			price, err := DB.ParseInputPrice(records[i])
 			if err != nil {

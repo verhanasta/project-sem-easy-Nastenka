@@ -26,10 +26,10 @@ else
     psql <<-EOSQL
         CREATE TABLE prices (
             id SERIAL PRIMARY KEY,
-            product_name TEXT NOT NULL,
+            name TEXT NOT NULL,
             category TEXT NOT NULL,
             price NUMERIC(10,2) NOT NULL,
-            creation_date TIMESTAMP NOT NULL
+            create_date TIMESTAMP NOT NULL
         );
         GRANT ALL PRIVILEGES ON TABLE prices TO validator;
         GRANT USAGE, SELECT ON SEQUENCE prices_id_seq TO validator;

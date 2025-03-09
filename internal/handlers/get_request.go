@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"project-sem/internal/utils"
-	"project-sem/internal/bd"
+	"project-sem/internal/db"
 )
 
 // HandlerGetPrices обрабатывает GET-запрос для получения данных из базы данных

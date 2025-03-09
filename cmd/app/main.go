@@ -18,10 +18,10 @@ func main() {
 }
 
 func run() error {
-	if err := bd.InitDB(); err != nil {
+	if err := db.InitDB(); err != nil {
 		return err
 	}
-	defer bd.CloseDB()
+	defer db.CloseDB()
 
 	r := mux.NewRouter()
 	r.HandleFunc("/api/v0/prices", handlers.HandlerPostPrices()).Methods("POST")

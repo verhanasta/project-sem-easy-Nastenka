@@ -12,7 +12,7 @@ import (
 func HandlerGetPrices() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Получаем данные из БД
-		prices, err := bd.GetAllPrices()
+		prices, err := db.GetAllPrices()
 		if err != nil {
 			log.Printf("DB query error: %v", err)
 			http.Error(w, "Database error", http.StatusInternalServerError)

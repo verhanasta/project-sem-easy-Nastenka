@@ -66,7 +66,7 @@ func InitDB() error {
 			id SERIAL PRIMARY KEY,
 			name TEXT,
 			category TEXT,
-			price NUMERIC,
+			price NUMERIC(10,2),
 			create_date TIMESTAMP
 		)
 	`)

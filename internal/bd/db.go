@@ -1,4 +1,4 @@
-package DB
+package bd
 
 import (
 	"database/sql"
@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var db *sql.DB
+var db *sql.bd
 
 // Price представляет структуру данных о товаре
 type Price struct {

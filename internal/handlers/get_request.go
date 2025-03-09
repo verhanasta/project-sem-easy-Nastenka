@@ -5,14 +5,14 @@ import (
 	"log"
 	"net/http"
 	"project-sem/internal/utils"
-	"project-sem/internal/DB"
+	"project-sem/internal/bd"
 )
 
 // HandlerGetPrices обрабатывает GET-запрос для получения данных из базы данных
 func HandlerGetPrices() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Получаем данные из БД
-		prices, err := DB.GetAllPrices()
+		prices, err := bd.GetAllPrices()
 		if err != nil {
 			log.Printf("DB query error: %v", err)
 			http.Error(w, "Database error", http.StatusInternalServerError)

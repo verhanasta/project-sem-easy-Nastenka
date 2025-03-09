@@ -105,6 +105,14 @@ func InsertPrices(records []InputPrice) (int, int, float64, error) {
 	}
 	defer stmt.Close()
 
+	// Находим минимальное значение create_date из текущего набора данных
+	minCreateDate := records[0].CreateDate
+	for _, record := range records {
+		if record.CreateDate.Before(minCreateDate) {
+			minCreateDate = record.CreateDate
+		}
+	}
+
 	// Вставка записей
 	for _, record := range records {
 		_, err = stmt.Exec(
@@ -119,18 +127,19 @@ func InsertPrices(records []InputPrice) (int, int, float64, error) {
 		}
 	}
 
-	// Подсчет статистики
+	// Подсчет статистики только для добавленных записей
 	var totalItems int
 	var totalPrice float64
 	var uniqueCategories int
 
 	err = tx.QueryRow(`
-		SELECT 
+		SELECT
 			COUNT(*) as total_items,
 			COUNT(DISTINCT category) as unique_categories,
 			COALESCE(SUM(price), 0) as total_price
 		FROM prices
-	`).Scan(&totalItems, &uniqueCategories, &totalPrice)
+		WHERE create_date >= $1
+	`, minCreateDate).Scan(&totalItems, &uniqueCategories, &totalPrice)
 	if err != nil {
 		tx.Rollback()
 		return 0, 0, 0, fmt.Errorf("statistics calculation error: %w", err)

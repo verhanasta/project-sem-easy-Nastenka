@@ -10,7 +10,7 @@ import (
 )
 
 // CreateCSVFromPrices создает CSV файл из массива цен
-func CreateCSVFromPrices(prices []bd.Price) (*bytes.Buffer, error) {
+func CreateCSVFromPrices(prices []db.Price) (*bytes.Buffer, error) {
 	var csvBuffer bytes.Buffer
 	writer := csv.NewWriter(&csvBuffer)
 

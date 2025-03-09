@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"os"
 	"project-sem/internal/db"
 	"strings"
 )
@@ -14,7 +13,7 @@ import (
 // HandlerGetPrices обрабатывает GET-запрос для получения данных из базы данных
 func HandlerPostPrices() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if err := r.ParseMultipartForm(10 << 20); err != nil {
+		if err := r.ParseMultipartForm(10 << 20); err != nil { // 10 MB
 			http.Error(w, "Error parsing form: "+err.Error(), http.StatusBadRequest)
 			return
 		}
@@ -26,25 +25,19 @@ func HandlerPostPrices() http.HandlerFunc {
 		}
 		defer file.Close()
 
-		tempFile, err := os.CreateTemp("", "upload-*.zip")
+		// Читаем содержимое файла в память
+		fileBytes, err := io.ReadAll(file)
 		if err != nil {
-			http.Error(w, "Temp file error: "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-		defer os.Remove(tempFile.Name())
-		defer tempFile.Close()
-
-		if _, err = io.Copy(tempFile, file); err != nil {
-			http.Error(w, "File save error: "+err.Error(), http.StatusInternalServerError)
+			http.Error(w, "File read error: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		zipReader, err := zip.OpenReader(tempFile.Name())
+		// Создаем zip.Reader из байтов
+		zipReader, err := zip.NewReader(strings.NewReader(string(fileBytes)), int64(len(fileBytes)))
 		if err != nil {
 			http.Error(w, "ZIP read error: "+err.Error(), http.StatusBadRequest)
 			return
 		}
-		defer zipReader.Close()
 
 		var csvFile *zip.File
 		for _, f := range zipReader.File {
